@@ -3,390 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page_title">Barangay Management System</title>
-    <link rel="stylesheet" href="css/shared.css">
+    <title>Resident Portal | Barangay Management System</title>
     <link rel="stylesheet" href="css/resident.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Language Selector (Top Right) -->
-    <div class="language-selector">
-        <select id="language-select">
-            <option value="" selected disabled data-i18n="select_language_type">Select Your Preffered Language</option>
-            <option value="en" data-i18n="english">English</option>
-            <option value="tl" data-i18n="tagalog">Tagalog</option>
-            <option value="ceb" data-i18n="bisaya">Bisaya</option>
-        </select>
-    </div>
-    
-    <!-- Chatbot Container -->
-    <div class="chatbot-container">
-      <!-- Chatbot Icon (Pokemon-sized) -->
-      <div class="chatbot-icon">
-        <img src="images/chatbot.png" alt="Chatbot">
-      </div>
-      
-      <!-- Chatbot Window (hidden by default) -->
-      <div class="chatbot-window">
-        <div class="chatbot-header">
-          <h3 data-i18n="chatbot_title">Longosian - Barangay Longos Help Desk Assistant</h3>
-          <button class="close-chatbot">&times;</button>
-        </div>
-        <div class="chatbot-messages">
-          <div class="chatbot-message bot-message">
-            <img src="images/hi.png" alt="Bot Avatar" class="bot-avatar">
-            <div class="message-bubble">
-              <p data-i18n="chatbot_greeting">Hello! I'm Longosian, your personal help desk bot! Feel free to chat with me for help.</p>
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-content">
+            <h1 class="website-title">Barangay Management System</h1>
+            <div class="status-controls">
+                <button class="notification-btn" id="notif-icon">
+                    <span id="notif-count">0</span>
+                </button>
+                <button class="logout-btn">
+                    Logout
+                </button>
             </div>
-          </div>
         </div>
-        <div class="chatbot-input">
-          <input type="text" placeholder="Type your question..." data-i18n-placeholder="chatbot_placeholder">
-          <button class="send-button" data-i18n="chatbot_send">Send</button>
-        </div>
-      </div>
     </div>
 
-    <!-- Full Screen Container -->
-    <div id="full-screen-container">
-        <!-- Status Bar -->
-        <div class="status-bar">
-            <div class="status-content">
-                <h1 class="website-title" data-i18n="title">Barangay Management System</h1>
-                <div class="status-controls">
-                    <button class="notification-btn" id="notif-icon">
-                      <img class="notif-icon" src="images/notification.png" alt="Notification">
-                      <span id="notif-count">0</span>
-                    </button>
-                    <button class="logout-btn">
-                      <img class="logout-icon" src="images/logout.png" alt="Logout">
-                    </button>
-                </div>
-            </div>
-        <div class="nav-controls">
-            <div class="notification-area">
-              <div id="notif-panel" class="notif-panel" style="display: none;">
-                <h4 data-i18n="notifications">Notifications</h4>
-                <ul id="notif-list"></ul>
-              </div>
-            </div>
+    <!-- Resident Container -->
+    <div class="container" id="resident-container">
+        <div class="header">
+            <h1>Select A Service</h1>
         </div>
 
-        <!-- Resident Container -->
-        <div class="container" id="resident-container">
-          <div class="header">
-            <h1 data-i18n="select_service">Select A Service</h1>
-          </div>
-
-          <div class="service-options">
+        <div class="service-options">
+            <!-- Request Document Option -->
             <div class="box">
-              <button data-service="request" class="service-btn">
-                <div class="imgBx">
-                  <img src="images/1.jpeg" alt="Request Catalog">
-                </div>
-                <div class="content">
-                  <h2 class="title" data-i18n="request_document">Request a Document</h2>
-                  <p data-i18n="request_document_desc">Choose the document you need, answer the form, submit, and pick it up.</p>
-                </div>
-              </button>
+                <button data-service="request" class="service-btn">
+                    <div class="imgBx">
+                        <img src="images/1.jpeg" alt="Request Catalog">
+                    </div>
+                    <div class="content">
+                        <h2 class="title">Request a Document</h2>
+                        <p>Choose the document you need and submit a request.</p>
+                    </div>
+                </button>
             </div>
             
+            <!-- File Complaint Option -->
             <div class="box">
-              <button data-service="complaint" class="service-btn">
-                <div class="imgBx">
-                  <img src="images/2.jpg" alt="Complaint Form">
-                </div>
-                <div class="content">
-                  <h2 class="title" data-i18n="file_complaint">File a Complaint</h2>
-                  <p data-i18n="file_complaint_desc">Report complaint for the improvement of our community.</p>
-                </div>
-              </button>
+                <button data-service="complaint" class="service-btn">
+                    <div class="imgBx">
+                        <img src="images/2.jpg" alt="Complaint Form">
+                    </div>
+                    <div class="content">
+                        <h2 class="title">File a Complaint</h2>
+                        <p>Report issues for the improvement of our community.</p>
+                    </div>
+                </button>
             </div>
             
+            <!-- Other Services Option -->
             <div class="box">
-              <button data-service="other" class="service-btn">
-                <div class="imgBx">
-                  <img src="images/3.jpg" alt="Other Services">
-                </div>
-                <div class="content">
-                  <h2 class="title" data-i18n="other_services">Other Services</h2>
-                  <p data-i18n="other_services_desc">Submit suggestions, feedback, or donations</p>
-                </div>
-              </button>
+                <button data-service="other" class="service-btn">
+                    <div class="imgBx">
+                        <img src="images/3.jpg" alt="Other Services">
+                    </div>
+                    <div class="content">
+                        <h2 class="title">Other Services</h2>
+                        <p>Submit suggestions, feedback, or donations.</p>
+                    </div>
+                </button>
             </div>
-          </div>
-        </div>
-
-        <!-- Tracking Container -->
-        <div class="container" id="tracking-container" style="display: none">
-          <div class="header">
-            <h1 data-i18n="my_submissions">My Submissions</h1>
-            <h2 data-i18n="track_submissions">Track your requests and complaints</h2>
-          </div>
-
-          <div class="nav-controls">
-            <button type="button" class="nav-btn" id="back-btn" data-i18n="back">Back</button>
-          </div>
-
-          <div class="tracking-tabs">
-            <button type="button" class="tab-btn active" data-tab="requests" data-i18n="my_requests">My Requests</button>
-            <button type="button" class="tab-btn" data-tab="complaints" data-i18n="my_complaints">My Complaints</button>
-            <button type="button" class="tab-btn" data-tab="others" data-i18n="my_other_services">My Other Services</button>
-          </div>
-
-          <div class="tracking-content">
-            <div class="tab-content active" id="requests-tab">
-              <div class="table-container">
-                <table class="tracking-table">
-                  <thead>
-                    <tr>
-                      <th data-i18n="request_id">Request ID</th>
-                      <th data-i18n="type">Type</th>
-                      <th data-i18n="date_submitted">Date Submitted</th>
-                      <th data-i18n="status">Status</th>
-                      <th data-i18n="actions">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="requests-list"></tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="tab-content" id="complaints-tab">
-              <div class="table-container">
-                <table class="tracking-table">
-                  <thead>
-                    <tr>
-                      <th data-i18n="complaint_id">Complaint ID</th>
-                      <th data-i18n="type">Type</th>
-                      <th data-i18n="date_submitted">Date Submitted</th>
-                      <th data-i18n="status">Status</th>
-                      <th data-i18n="actions">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="complaints-list"></tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="tab-content" id="others-tab">
-              <div class="table-container">
-                <table class="tracking-table">
-                  <thead>
-                    <tr>
-                      <th data-i18n="service_id">Service ID</th>
-                      <th data-i18n="type">Type</th>
-                      <th data-i18n="date_submitted">Date Submitted</th>
-                      <th data-i18n="status">Status</th>
-                      <th data-i18n="actions">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="others-list"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Request Form Container --> 
-        <div class="container" id="request-form-container" style="display: none">
-          <div class="header">
-            <h2 data-i18n="request_form">Request Form</h2>
-          </div>
-
-          <div class="nav-controls">
-            <button type="button" class="nav-btn" id="back-btn" data-i18n="back">Back</button>
-            <button type="button" class="nav-btn" id="tracking-btn" data-i18n="my_submissions">My Submissions</button>
-          </div>
-
-          <form id="request-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="barangay-id" data-i18n="email">Email</label>
-                <input type="email" id="barangay-id" data-i18n-placeholder="email_example" placeholder="juandelacruz@gmail.com" required />
-              </div>
-
-              <div class="form-group">
-                <label for="submit-plan" data-i18n="request">Request</label>
-                <select type="" id="request" required>
-                    <option value="" selected disabled data-i18n="select_request">Select Request</option>
-                    <option value="Barangay ID" data-i18n="barangay_id">Barangay ID</option>
-                    <option value="Solo Parent ID" data-i18n="solo_parent_id">Solo Parent ID</option>
-                    <option value="CoI" data-i18n="certificate_indigency">Certificate of Indigency</option>
-                    <option value="CoR" data-i18n="certificate_residency">Certificate of Residency</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="first-name-req" data-i18n="first_name">First Name</label>
-                <input type="text" id="first-name-req" data-i18n-placeholder="first_name_placeholder" placeholder="Please type your first name." required />
-              </div>
-
-              <div class="form-group">
-                <label for="last-name-req" data-i18n="last_name">Last Name</label>
-                <input type="text" id="last-name-req" data-i18n-placeholder="last_name_placeholder" placeholder="Please type your last name." required />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="address" data-i18n="address">Address</label>
-                <input type="text" id="address" data-i18n-placeholder="address_placeholder" placeholder="House No., Street, Barangay, City" required />
-                </div>
-              <div class="form-group">
-                <label for="contact-number" data-i18n="contact_number">Contact Number</label>
-                <input
-                  type="tel"
-                  id="contact-number"
-                  name="contact-number"
-                  maxlength="11"
-                  required pattern="^[0-9]{10,11}$"
-                  data-i18n-placeholder="contact_number_placeholder"
-                  placeholder="09XXXXXXXXX"
-                  oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="dob" data-i18n="dob">Date of Birth</label>
-                <input type="date" id="dob" required />
-              </div>
-
-              <div class="form-group">
-                <label for="gender" data-i18n="gender">Gender</label>
-                <select id="gender" required>
-                  <option value="" selected disabled data-i18n="select_gender">Select Gender</option>
-                  <option value="male" data-i18n="male">Male</option>
-                  <option value="female" data-i18n="female">Female</option>
-                  <option value="other" data-i18n="other_gender">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <button type="submit" class="btn" data-i18n="submit_request">Submit Request</button>
-          </form>
-        </div>
-
-        <!-- Complaint Form Container -->
-        <div class="container" id="complaint-form-container" style="display: none">
-          <div class="header">
-            <h2 data-i18n="complaint_form">Complaint Form</h2>
-          </div>
-
-          <div class="nav-controls">
-            <button type="button" class="nav-btn" id="back-btn" data-i18n="back">Back</button>
-            <button type="button" class="nav-btn" id="tracking-btn" data-i18n="my_submissions">My Submissions</button>
-          </div>
-
-          <form id="complaint-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="first-name-comp" data-i18n="first_name">First Name</label>
-                <input type="text" id="first-name-comp" data-i18n-placeholder="first_name_placeholder" placeholder="Please type your first name." required />
-              </div>
-
-              <div class="form-group">
-                <label for="last-name-comp" data-i18n="last_name">Last Name</label>
-                <input type="text" id="last-name-comp" data-i18n-placeholder="last_name_placeholder" placeholder="Please type your last name." required />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="address-comp" data-i18n="address">Address</label>
-              <input type="text" id="address-comp" data-i18n-placeholder="address_placeholder" placeholder="House No., Street, Barangay, City" required />
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="contact-number" data-i18n="contact_number">Contact Number</label>
-                <input
-                  type="tel"
-                  id="contact-number"
-                  name="contact-number"
-                  maxlength="11"
-                  required pattern="^[0-9]{10,11}$"
-                  data-i18n-placeholder="contact_number_placeholder"
-                  oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
-              </div>
-
-              <div class="form-group">
-                <label for="email-comp" data-i18n="email">Email</label>
-                <input type="email" id="email-comp" data-i18n-placeholder="email_example" placeholder="juandelacruz@gmail.com" required />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="complaint-type" data-i18n="complaint_type">Type of Complaint</label>
-              <select id="complaint-type" required>
-                <option value="" data-i18n="select_complaint_type">Choose the type of your complaint</option>
-                <option value="noise" data-i18n="noise">Noise Complaint</option>
-                <option value="property" data-i18n="property">Property Issue</option>
-                <option value="sanitation" data-i18n="sanitation">Sanitation Concern</option>
-                <option value="safety" data-i18n="safety">Safety Concern</option>
-                <option value="other" data-i18n="other_complaint">Other</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="complaint-details" data-i18n="complaint_details">Complaint Details</label>
-              <textarea id="complaint-details" rows="4" data-i18n-placeholder="complaint_details_placeholder" placeholder="Please describe your complaint." required></textarea>
-            </div>
-
-            <button type="submit" class="btn" data-i18n="submit_complaint">Submit Complaint</button>
-          </form>
-        </div>
-
-        <!-- Other Services Form Container -->
-        <div class="container" id="other-form-container" style="display: none">
-          <div class="header">
-            <h2 data-i18n="other_services">Other Services</h2>
-          </div>
-
-          <div class="nav-controls">
-            <button type="button" class="nav-btn" id="back-btn" id="backToServicesFromOthers" data-i18n="back">Back</button>
-            <button type="button" class="nav-btn" id="tracking-btn" data-i18n="my_submissions">My Submissions</button>
-          </div>
-          <div class="complaint-form" required>
-            <form id="otherServicesForm">
-              <div class="form-group">
-                <label for="serviceType" data-i18n="service_type">Service Type</label>
-                <select id="serviceType" required>
-                  <option value="" disabled selected data-i18n="select_service_type">Select service type</option>
-                  <option value="Suggestion" data-i18n="suggestion">Suggestion</option>
-                  <option value="Feedback" data-i18n="feedback">Feedback</option>
-                  <option value="Donation" data-i18n="donation">Donation</option>
-                  <option value="Volunteer" data-i18n="volunteer">Volunteer</option>
-                  <option value="Blotter" data-i18n="blotter">Blotter</option>
-                  <option value="Report a Bug or Website Error" data-i18n="bug">Report a Bug or Website Error</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="serviceDetails" data-i18n="details">Details</label>
-                <textarea id="serviceDetails" rows="4" required></textarea>
-              </div>
-              <div class="form-group" id="donationAmountGroup" style="display: none;">
-                <label for="donationAmount" data-i18n="donation_amount">Donation Amount (PHP)</label>
-                <input type="number" id="donationAmount" min="0">
-              </div>
-              <button type="submit" class="btn" data-i18n="submit_service">Submit</button>
-            </form>
-          </div>
         </div>
     </div>
 
-    <!-- Modal for details view -->
-    <div id="details-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2 id="modal-title" data-i18n="details">Details</h2>
-        <div id="modal-body"></div>
-        <div id="modal-actions"></div>
-      </div>
-    </div>
-
+    <!-- Other resident sections would go here -->
     <script src="script.js"></script>
 </body>
 </html>
