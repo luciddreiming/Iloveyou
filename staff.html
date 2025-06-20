@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">Barangay Management System</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/staff.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Language Selector (Top Right) -->
+    <div class="language-selector">
+        <select id="language-select">
+            <option value="" selected disabled data-i18n="select_language_type">Select Your Preffered Language</option>
+            <option value="en" data-i18n="english">English</option>
+            <option value="tl" data-i18n="tagalog">Tagalog</option>
+            <option value="ceb" data-i18n="bisaya">Bisaya</option>
+        </select>
+    </div>
+    
+    <!-- Chatbot Container -->
+    <div class="chatbot-container">
+      <!-- Chatbot Icon (Pokemon-sized) -->
+      <div class="chatbot-icon">
+        <img src="images/chatbot.png" alt="Chatbot">
+      </div>
+      
+      <!-- Chatbot Window (hidden by default) -->
+      <div class="chatbot-window">
+        <div class="chatbot-header">
+          <h3 data-i18n="chatbot_title">Longosian - Barangay Longos Help Desk Assistant</h3>
+          <button class="close-chatbot">&times;</button>
+        </div>
+        <div class="chatbot-messages">
+          <div class="chatbot-message bot-message">
+            <img src="images/hi.png" alt="Bot Avatar" class="bot-avatar">
+            <div class="message-bubble">
+              <p data-i18n="chatbot_greeting">Hello! I'm Longosian, your personal help desk bot! Feel free to chat with me for help.</p>
+            </div>
+          </div>
+        </div>
+        <div class="chatbot-input">
+          <input type="text" placeholder="Type your question..." data-i18n-placeholder="chatbot_placeholder">
+          <button class="send-button" data-i18n="chatbot_send">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full Screen Container -->
+    <div id="full-screen-container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-content">
+                <h1 class="website-title" data-i18n="title">Barangay Management System</h1>
+                <div class="status-controls">
+                    <button class="notification-btn" id="notif-icon">
+                      <img class="notif-icon" src="images/notification.png" alt="Notification">
+                      <span id="notif-count">0</span>
+                    </button>
+                    <button class="logout-btn">
+                      <img class="logout-icon" src="images/logout.png" alt="Logout">
+                    </button>
+                </div>
+            </div>
+        <div class="nav-controls">
+            <div class="notification-area">
+              <div id="notif-panel" class="notif-panel" style="display: none;">
+                <h4 data-i18n="notifications">Notifications</h4>
+                <ul id="notif-list"></ul>
+              </div>
+            </div>
+        </div>
+
+        <!-- Staff Container -->
+        <div class="container" id="staff-container">
+          <div class="header">
+            <h1 data-i18n="staff_portal">Barangay Staff Portal</h1>
+            <p data-i18n="staff_portal_desc">Please enter your staff password to continue</p>
+          </div>
+
+          <div class="form-container">
+            <form id="staff-auth-form">
+              <div class="form-group">
+                <label for="staff-password" data-i18n="staff_password">Staff Password</label>
+                <div class="password-container">
+                  <input type="password" id="staff-password" required />
+                  <span class="toggle-password" id="toggleStaffPassword">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 6c-3.95 0-7.2 2.3-9 6 1.8 3.7 5.05 6 9 6s7.2-2.3 9-6c-1.8-3.7-5.05-6-9-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6.5A2.5 2.5 0 0 0 9.5 12 2.5 2.5 0 0 0 12 14.5 2.5 2.5 0 0 0 14.5 12 2.5 2.5 0 0 0 12 9.5z"/>
+                      <path d="M22 2L2 22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+              <button type="submit" class="btn" data-i18n="authenticate">Authenticate</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Staff Dashboard -->
+        <div class="container" id="staff-dashboard" style="display: none">
+          <div class="header">
+            <h3 data-i18n="staff_dashboard">Barangay Staff Dashboard</h3>
+          </div>
+          <div class="dashboard">
+            <div class="stats">
+              <div class="stat-card">
+                <h3 data-i18n="pending">Pending</h3>
+                <p class="stat-value" id="pending-count">0</p>
+              </div>
+
+              <div class="stat-card">
+                <h3 data-i18n="processing">Processing</h3>
+                <p class="stat-value" id="processing-count">0</p>
+              </div>
+
+              <div class="stat-card">
+                <h3 data-i18n="completed">Completed</h3>
+                <p class="stat-value" id="completed-count">0</p>
+              </div>
+            </div>
+
+            <div class="staff-actions">
+              <h2 data-i18n="manage_submissions">Manage Submissions</h2>
+              <div class="submission-tabs">
+                <button type="button" class="tab-btn active" data-tab="requests" data-i18n="requests">Requests</button>
+                <button type="button" class="tab-btn" data-tab="complaints" data-i18n="complaints">Complaints</button>
+                <button type="button" class="tab-btn" data-tab="others" data-i18n="other_services">Other Services</button>
+              </div>
+
+              <div class="submission-content">
+                <div class="tab-content active" id="requests-tab-staff">
+                  <div class="table-container">
+                    <table class="submission-table">
+                      <thead>
+                        <tr>
+                          <th data-i18n="id">ID</th>
+                          <th data-i18n="resident">Resident</th>
+                          <th data-i18n="type">Type</th>
+                          <th data-i18n="date">Date</th>
+                          <th data-i18n="status">Status</th>
+                          <th data-i18n="action">Action</th>
+                          <th>      </th>                           
+                        </tr>
+                      </thead>
+                      <tbody id="staff-requests-list"></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="tab-content" id="complaints-tab-staff">
+                  <div class="table-container">
+                    <table class="submission-table">
+                      <thead>
+                        <tr>
+                          <th data-i18n="id">ID</th>
+                          <th data-i18n="resident">Resident</th>
+                          <th data-i18n="type">Type</th>
+                          <th data-i18n="date">Date</th>
+                          <th data-i18n="status">Status</th>
+                          <th data-i18n="action">Action</th>
+                          <th>      </th>
+                        </tr>
+                      </thead>
+                      <tbody id="staff-complaints-list"></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="tab-content" id="others-tab-staff">
+                  <div class="table-container">
+                    <table class="submission-table">
+                      <thead>
+                        <tr>
+                          <th data-i18n="id">ID</th>
+                          <th data-i18n="resident">Resident</th>
+                          <th data-i18n="type">Type</th>
+                          <th data-i18n="date">Date</th>
+                          <th data-i18n="status">Status</th>
+                          <th data-i18n="action">Action</th>
+                          <th>      </th>
+                        </tr>
+                      </thead>
+                      <tbody id="staff-others-list"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Modal for details view -->
+    <div id="details-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="modal-title" data-i18n="details">Details</h2>
+        <div id="modal-body"></div>
+        <div id="modal-actions"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
