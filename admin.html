@@ -3,245 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page_title">Barangay Management System</title>
-    <link rel="stylesheet" href="css/shared.css">
+    <title>Admin Portal | Barangay Management System</title>
     <link rel="stylesheet" href="css/admin.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Language Selector (Top Right) -->
-    <div class="language-selector">
-        <select id="language-select">
-            <option value="" selected disabled data-i18n="select_language_type">Select Your Preffered Language</option>
-            <option value="en" data-i18n="english">English</option>
-            <option value="tl" data-i18n="tagalog">Tagalog</option>
-            <option value="ceb" data-i18n="bisaya">Bisaya</option>
-        </select>
-    </div>
-    
-    <!-- Chatbot Container -->
-    <div class="chatbot-container">
-      <!-- Chatbot Icon (Pokemon-sized) -->
-      <div class="chatbot-icon">
-        <img src="images/chatbot.png" alt="Chatbot">
-      </div>
-      
-      <!-- Chatbot Window (hidden by default) -->
-      <div class="chatbot-window">
-        <div class="chatbot-header">
-          <h3 data-i18n="chatbot_title">Longosian - Barangay Longos Help Desk Assistant</h3>
-          <button class="close-chatbot">&times;</button>
-        </div>
-        <div class="chatbot-messages">
-          <div class="chatbot-message bot-message">
-            <img src="images/hi.png" alt="Bot Avatar" class="bot-avatar">
-            <div class="message-bubble">
-              <p data-i18n="chatbot_greeting">Hello! I'm Longosian, your personal help desk bot! Feel free to chat with me for help.</p>
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-content">
+            <h1 class="website-title">Barangay Admin Portal</h1>
+            <div class="status-controls">
+                <button class="logout-btn">
+                    Logout
+                </button>
             </div>
-          </div>
         </div>
-        <div class="chatbot-input">
-          <input type="text" placeholder="Type your question..." data-i18n-placeholder="chatbot_placeholder">
-          <button class="send-button" data-i18n="chatbot_send">Send</button>
-        </div>
-      </div>
     </div>
 
-    <!-- Full Screen Container -->
-    <div id="full-screen-container">
-        <!-- Status Bar -->
-        <div class="status-bar">
-            <div class="status-content">
-                <h1 class="website-title" data-i18n="title">Barangay Management System</h1>
-                <div class="status-controls">
-                    <button class="notification-btn" id="notif-icon">
-                      <img class="notif-icon" src="images/notification.png" alt="Notification">
-                      <span id="notif-count">0</span>
-                    </button>
-                    <button class="logout-btn">
-                      <img class="logout-icon" src="images/logout.png" alt="Logout">
-                    </button>
-                </div>
-            </div>
+    <!-- Admin Dashboard -->
+    <div class="container" id="admin-dashboard">
+        <div class="header">
+            <h1>Admin Dashboard</h1>
+        </div>
+
         <div class="nav-controls">
-            <div class="notification-area">
-              <div id="notif-panel" class="notif-panel" style="display: none;">
-                <h4 data-i18n="notifications">Notifications</h4>
-                <ul id="notif-list"></ul>
-              </div>
-            </div>
+            <button type="button" class="nav-btn active" data-page="dashboard">Dashboard</button>
+            <button type="button" class="nav-btn" data-page="status-board">Status Board</button>
         </div>
 
-        <!-- Admin Container -->
-        <div class="container" id="admin-container">
-          <div class="header">
-            <h1 data-i18n="admin_portal">Admin Portal</h1>
-            <p data-i18n="admin_portal_desc">Please enter your admin password to continue</p>
-          </div>
-
-          <div class="form-container">
-            <form id="admin-auth-form">
-              <div class="form-group">
-                <label for="admin-password" data-i18n="admin_password">Admin Password</label>
-                <div class="password-container">
-                  <input type="password" id="admin-password" required />
-                  <span class="toggle-password" id="toggleAdminPassword">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 6c-3.95 0-7.2 2.3-9 6 1.8 3.7 5.05 6 9 6s7.2-2.3 9-6c-1.8-3.7-5.05-6-9-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6.5A2.5 2.5 0 0 0 9.5 12 2.5 2.5 0 0 0 12 14.5 2.5 2.5 0 0 0 14.5 12 2.5 2.5 0 0 0 12 9.5z"/>
-                      <path d="M22 2L2 22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                  </span>
-                </div>
-              </div>
-
-              <button type="submit" class="btn" data-i18n="authenticate">Authenticate</button>
-            </form>
-          </div>
-        </div>
-
-        <!-- Admin Dashboard -->
-        <div class="container" id="admin-dashboard" style="display: none">
-          <div class="header">
-            <h1 data-i18n="admin_dashboard">Admin Dashboard</h1>
-          </div>
-
-          <div class="nav-controls">
-            <button type="button" class="nav-btn active" data-page="dashboard" data-i18n="dashboard">Dashboard</button>
-            <button type="button" class="nav-btn" data-page="status-board" data-i18n="status_board">Status Board</button>
-          </div>
-
-          <div class="dashboard">
+        <div class="dashboard">
             <div class="stats">
-              <div class="stat-card">
-                <h3 data-i18n="total_users">Total Users</h3>
-                <p class="stat-value" id="total-users">0</p>
-              </div>
-
-              <div class="stat-card">
-                <h3 data-i18n="active_staff">Active Staff</h3>
-                <p class="stat-value" id="active-staff">0</p>
-              </div>
-
-              <div class="stat-card">
-                <h3 data-i18n="pending_issues">Pending Issues</h3>
-                <p class="stat-value" id="pending-issues">0</p>
-              </div>
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <p class="stat-value" id="total-users">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Staff</h3>
+                    <p class="stat-value" id="active-staff">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Issues</h3>
+                    <p class="stat-value" id="pending-issues">0</p>
+                </div>
             </div>
 
             <div class="admin-actions">
-              <h2 data-i18n="send_updates">Send Updates to Residents</h2>
-              <form id="email-form">
-                <div class="form-group">
-                  <label for="resident-email" data-i18n="resident_email">Resident Email</label>
-                  <select id="resident-email" required>
-                    <option value="" data-i18n="select_resident">Select Resident</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="concern-type" data-i18n="concern_type">Concern Type</label>
-                  <select id="concern-type" required>
-                    <option value="" selected disabled data-i18n="select_concern_type">Select Concern Type</option>
-                    <option value="request" data-i18n="request_update">Request Update</option>
-                    <option value="complaint" data-i18n="complaint_update">Complaint Update</option>
-                    <option value="other" data-i18n="other_service_update">Other Service Update</option>
-                    <option value="general" data-i18n="general_announcement">General Announcement</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="email-subject" data-i18n="subject">Subject</label>
-                  <input type="text" id="email-subject" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="email-message" data-i18n="message">Message</label>
-                  <textarea id="email-message" rows="5" required></textarea>
-                </div>
-
-                <button type="submit" class="btn" data-i18n="send_email">Send Email</button>
-              </form>
+                <h2>Send Updates to Residents</h2>
+                <form id="email-form">
+                    <!-- Email form would go here -->
+                </form>
             </div>
-
-            <div class="admin-status-board" id="admin-status-board" style="display: none;">
-              <h2 data-i18n="status_board">Status Board</h2>
-              <div class="submission-tabs">
-                <button type="button" class="tab-btn active" data-tab="requests" data-i18n="requests">Requests</button>
-                <button type="button" class="tab-btn" data-tab="complaints" data-i18n="complaints">Complaints</button>
-                <button type="button" class="tab-btn" data-tab="others" data-i18n="other_services">Other Services</button>
-              </div>
-
-              <div class="submission-content">
-                <div class="tab-content active" id="requests-tab-admin">
-                  <div class="table-container">
-                    <table class="submission-table">
-                      <thead>
-                        <tr>
-                          <th data-i18n="id">ID</th>
-                          <th data-i18n="resident">Resident</th>
-                          <th data-i18n="type">Type</th>
-                          <th data-i18n="date">Date</th>
-                          <th data-i18n="status">Status</th>
-                          <th data-i18n="updated_by">Updated By</th>
-                          <th data-i18n="actions">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody id="admin-requests-list"></tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <div class="tab-content" id="complaints-tab-admin">
-                  <div class="table-container">
-                    <table class="submission-table">
-                      <thead>
-                        <tr>
-                          <th data-i18n="id">ID</th>
-                          <th data-i18n="resident">Resident</th>
-                          <th data-i18n="type">Type</th>
-                          <th data-i18n="date">Date</th>
-                          <th data-i18n="status">Status</th>
-                          <th data-i18n="updated_by">Updated By</th>
-                          <th data-i18n="actions">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody id="admin-complaints-list"></tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <div class="tab-content" id="others-tab-admin">
-                  <div class="table-container">
-                    <table class="submission-table">
-                      <thead>
-                        <tr>
-                          <th data-i18n="id">ID</th>
-                          <th data-i18n="resident">Resident</th>
-                          <th data-i18n="type">Type</th>
-                          <th data-i18n="date">Date</th>
-                          <th data-i18n="status">Status</th>
-                          <th data-i18n="updated_by">Updated By</th>
-                          <th data-i18n="actions">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody id="admin-others-list"></tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-    </div>
-
-    <!-- Modal for details view -->
-    <div id="details-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2 id="modal-title" data-i18n="details">Details</h2>
-        <div id="modal-body"></div>
-        <div id="modal-actions"></div>
-      </div>
     </div>
 
     <script src="script.js"></script>
